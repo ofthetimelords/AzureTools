@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TheQ.Libraries.AzureTools.AutoQueue</AssemblyName>
+    <RootNamespace>TheQ.Libraries.AzureTools.AutoQueue</RootNamespace>
+  </PropertyGroup>
+
+</Project>

@@ -5,4 +5,9 @@
     <AssemblyName>TheQ.Libraries.AzureTools.Common</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.0" />
+  </ItemGroup>
+
 </Project>

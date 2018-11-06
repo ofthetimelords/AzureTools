@@ -6,4 +6,9 @@
     <RootNamespace>TheQ.Libraries.AzureTools.AutoQueue</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Microsoft.Azure.Storage.Queue" Version="9.4.0" />
+  </ItemGroup>
+
 </Project>

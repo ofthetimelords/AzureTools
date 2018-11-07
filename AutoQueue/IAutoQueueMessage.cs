@@ -8,9 +8,13 @@ using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
-    public interface IQueueMessageWrapper
+    public interface IAutoQueueMessage
     {
         CloudQueueMessage OriginalMessage { get; }
+
+        string MessageId { get; }
+
+        string OffloadMarker { get; }
 
         T ParseMessage<T>() where T : class;
 

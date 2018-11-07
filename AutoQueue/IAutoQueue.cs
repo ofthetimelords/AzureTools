@@ -9,7 +9,7 @@ using TheQ.Libraries.AzureTools.AutoQueue.Options;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
-    public interface IQueueWrapper
+    public interface IAutoQueue
     {
         CloudQueue OriginalQueue { get; }
 

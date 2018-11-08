@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Options;
+using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
 
 #endregion
 
@@ -11,7 +12,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 {
     public interface IAutoQueue
     {
-        CloudQueue OriginalQueue { get; }
+        ICloudQueue OriginalQueue { get; }
 
         Task ListenAsync(ListenOptions options);
 

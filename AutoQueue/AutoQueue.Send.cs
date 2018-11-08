@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Options;
+using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
 
 #endregion
 

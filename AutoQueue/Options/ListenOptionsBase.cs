@@ -3,6 +3,8 @@
 using System;
 using System.Threading;
 using JetBrains.Annotations;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 #endregion
 
@@ -75,5 +77,9 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
         ///     The frequency with which the queue is being polled for new messages.
         /// </summary>
         public TimeSpan PollFrequency { get; }
+
+        public QueueRequestOptions RequestOptions { get; }
+
+        public OperationContext Context { get; }
     }
 }

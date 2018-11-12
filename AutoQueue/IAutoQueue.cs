@@ -2,6 +2,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Options;
 using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
@@ -21,9 +22,13 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         Task ListenParallelAsync(ListenParallelOptions options);
 
         void SendMessage<T>(T message) where T : class;
+        void SendMessage<T>(T message, SendMessageOptions options) where T : class;
+
 
         Task SendMessageAsync<T>(T message) where T : class;
+        Task SendMessageAsync<T>(T message, SendMessageOptions options) where T : class;
 
         Task SendMessageAsync<T>(T message, CancellationToken token) where T : class;
+        Task SendMessageAsync<T>(T message, SendMessageOptions options, CancellationToken token) where T : class;
     }
 }

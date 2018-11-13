@@ -19,16 +19,25 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
             throw new NotImplementedException();
         }
 
+        public void SendMessage<T>(T message, RequestOptions options) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <exception cref="NotImplementedException">In progress.</exception>
         public Task SendMessageAsync<T>(T message) where T : class
         {
             throw new NotImplementedException();
         }
 
+        public Task SendMessageAsync<T>(T message, RequestOptions options) where T : class => throw new NotImplementedException();
+
         /// <exception cref="NotImplementedException">In progress.</exception>
         public Task SendMessageAsync<T>(T message, CancellationToken token) where T : class
         {
             throw new NotImplementedException();
         }
+
+        public Task SendMessageAsync<T>(T message, RequestOptions options, CancellationToken token) where T : class => throw new NotImplementedException();
     }
 }

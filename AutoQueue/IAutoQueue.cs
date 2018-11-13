@@ -22,13 +22,13 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         Task ListenParallelAsync(ListenParallelOptions options);
 
         void SendMessage<T>(T message) where T : class;
-        void SendMessage<T>(T message, SendMessageOptions options) where T : class;
+        void SendMessage<T>(T message, RequestOptions options) where T : class;
 
 
         Task SendMessageAsync<T>(T message) where T : class;
-        Task SendMessageAsync<T>(T message, SendMessageOptions options) where T : class;
+        Task SendMessageAsync<T>(T message, RequestOptions options) where T : class;
 
         Task SendMessageAsync<T>(T message, CancellationToken token) where T : class;
-        Task SendMessageAsync<T>(T message, SendMessageOptions options, CancellationToken token) where T : class;
+        Task SendMessageAsync<T>(T message, RequestOptions options, CancellationToken token) where T : class;
     }
 }

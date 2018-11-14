@@ -20,7 +20,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
         /// Poison Message Threshold cannot be lower than 1
         /// </exception>
         protected ListenOptionsBase(
-            TimeSpan timeWindow,
+            TimeSpan invisibilityPeriod,
             TimeSpan messageLeaseTime,
             TimeSpan pollFrequency,
             int poisonMessageThreshold,
@@ -28,12 +28,10 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
             [CanBeNull] Action<Exception> exceptionHandler = null)
         {
             if (messageLeaseTime.TotalSeconds < TimeSpan.FromSeconds(30).TotalSeconds) throw new ArgumentException("Message Lease Time cannot be lower than 30 seconds!");
-
             if (pollFrequency.TotalSeconds < TimeSpan.FromSeconds(1).TotalSeconds) throw new ArgumentException("Poll Frequency cannot be lower than 1 second!");
-
             if (poisonMessageThreshold < 1) throw new ArgumentException("Poison Message Threshold cannot be lower than 1");
 
-            this.InvisibilityPeriod = timeWindow;
+            this.InvisibilityPeriod = invisibilityPeriod;
             this.MessageLeaseTime = messageLeaseTime;
             this.PollFrequency = pollFrequency;
             this.PoisonMessageThreshold = poisonMessageThreshold;
@@ -78,8 +76,6 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
         /// </summary>
         public TimeSpan PollFrequency { get; }
 
-        public QueueRequestOptions RequestOptions { get; }
-
-        public OperationContext Context { get; }
+        public RequestOptions RequestOptions { get; }
     }
 }

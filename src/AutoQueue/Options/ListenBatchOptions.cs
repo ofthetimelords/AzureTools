@@ -13,7 +13,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
     public class ListenBatchOptions : ListenOptionsBase
     {
         public ListenBatchOptions(
-            TimeSpan timeWindow,
+            TimeSpan invisibilityPeriod,
             TimeSpan messageLeaseTime,
             TimeSpan pollFrequency,
             int poisonMessageThreshold,
@@ -21,7 +21,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
             CancellationToken cancelToken,
             [NotNull] Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> messageHandler,
             [CanBeNull] Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> poisonHandler = null,
-            [CanBeNull] Action<Exception> exceptionHandler = null) : base(timeWindow, messageLeaseTime, pollFrequency, poisonMessageThreshold, cancelToken, exceptionHandler)
+            [CanBeNull] Action<Exception> exceptionHandler = null) : base(invisibilityPeriod, messageLeaseTime, pollFrequency, poisonMessageThreshold, cancelToken, exceptionHandler)
 
         {
             this.MessageHandler = messageHandler ?? throw new ArgumentNullException(nameof(messageHandler), "The Message Handler delegate is required");
@@ -32,13 +32,13 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
 
 
         [NotNull]
-        public Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> MessageHandler { get; private set; }
+        public Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> MessageHandler { get; }
 
 
         [CanBeNull]
-        public Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> PoisonHandler { get; private set; }
+        public Func<IList<IAutoQueueMessage>, Task<IList<IAutoQueueMessage>>> PoisonHandler { get; }
 
 
-        public int MaximumCurrentMessages { get; private set; }
+        public int MaximumCurrentMessages { get; }
     }
 }

@@ -9,7 +9,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
 {
     public class CloudQueueMessageWrapper : ICloudQueueMessage
     {
-        public CloudQueueMessageWrapper(CloudQueueMessage original) => this.Original = original;
+        public CloudQueueMessageWrapper(CloudQueueMessage original) => this.Original = original ?? throw new ArgumentNullException(nameof(original), $"Parameter ${nameof(original)} is required");
 
         public byte[] AsBytes => this.Original.AsBytes;
 

@@ -11,8 +11,14 @@ using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
+    /// <summary>
+    /// An AutoQueue implementation.
+    /// </summary>
     public interface IAutoQueue
     {
+        /// <summary>
+        /// Gets the original <see cref="ICloudQueue"/> that backs this instance.
+        /// </summary>
         ICloudQueue OriginalQueue { get; }
 
         Task ListenAsync(ListenOptions options);
@@ -21,14 +27,12 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 
         Task ListenParallelAsync(ListenParallelOptions options);
 
-        void SendMessage<T>(T message) where T : class;
-        void SendMessage<T>(T message, RequestOptions options) where T : class;
+        Task SendMessageAsync(object message);
 
+        Task SendMessageAsync(object message, RequestOptions options);
 
-        Task SendMessageAsync<T>(T message) where T : class;
-        Task SendMessageAsync<T>(T message, RequestOptions options) where T : class;
+        Task SendMessageAsync(object message, CancellationToken token);
 
-        Task SendMessageAsync<T>(T message, CancellationToken token) where T : class;
-        Task SendMessageAsync<T>(T message, RequestOptions options, CancellationToken token) where T : class;
+        Task SendMessageAsync(object message, RequestOptions options, CancellationToken token);
     }
 }

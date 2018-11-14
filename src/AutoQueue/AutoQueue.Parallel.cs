@@ -10,8 +10,8 @@ using TheQ.Libraries.AzureTools.AutoQueue.Options;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
-    public partial class AutoQueue : IAutoQueue
+    public partial class AutoQueue
     {
-        public Task ListenBatchAsync(ListenBatchOptions options) => throw new NotImplementedException();
+        public Task ListenParallelAsync(ListenParallelOptions options) => throw new NotImplementedException();
     }
 }

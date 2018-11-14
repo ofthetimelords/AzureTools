@@ -12,7 +12,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
     public class ListenOptions : ListenOptionsBase
     {
         public ListenOptions(
-            TimeSpan timeWindow,
+            TimeSpan invisibilityPeriod,
             TimeSpan messageLeaseTime,
             TimeSpan pollFrequency,
             int poisonMessageThreshold,
@@ -20,7 +20,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
             [NotNull] Func<IAutoQueueMessage, Task<bool>> messageHandler,
             [CanBeNull] Func<IAutoQueueMessage, Task<bool>> poisonHandler = null,
             [CanBeNull] Action<Exception> exceptionHandler = null)
-            : base(timeWindow, messageLeaseTime, pollFrequency, poisonMessageThreshold, cancelToken, exceptionHandler)
+            : base(invisibilityPeriod, messageLeaseTime, pollFrequency, poisonMessageThreshold, cancelToken, exceptionHandler)
 
         {
             this.MessageHandler = messageHandler ?? throw new ArgumentNullException(nameof(messageHandler), "The Message Handler delegate is required");

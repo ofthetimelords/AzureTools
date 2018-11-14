@@ -16,7 +16,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
 {
     public class CloudQueueWrapper : ICloudQueue
     {
-        public CloudQueueWrapper(CloudQueue original) => this.Original = original;
+        public CloudQueueWrapper(CloudQueue original) => this.Original = original ?? throw new ArgumentNullException(nameof(original), $"Parameter ${nameof(original)} is required");
 
         public int? ApproximateMessageCount => this.Original.ApproximateMessageCount;
 
@@ -35,7 +35,6 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
         public StorageUri StorageUri => this.Original.StorageUri;
 
         public Uri Uri => this.Original.Uri;
-
 
         public static implicit operator CloudQueue(CloudQueueWrapper wrapper) => wrapper.Original;
 
@@ -101,8 +100,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
         public Task SetPermissionsAsync(QueuePermissions permissions, RequestOptions requestOptions, CancellationToken cancellationToken) =>
             this.Original.SetPermissionsAsync(permissions, requestOptions.QueueRequestOptions, requestOptions.Context, cancellationToken);
 
-        public Task UpdateMessageAsync(ICloudQueueMessage message, TimeSpan visibilityTimeout, MessageUpdateFields updateFields, RequestOptions requestOptions,
-            CancellationToken cancellationToken) =>
+        public Task UpdateMessageAsync(ICloudQueueMessage message, TimeSpan visibilityTimeout, MessageUpdateFields updateFields, RequestOptions requestOptions, CancellationToken cancellationToken) =>
             this.Original.UpdateMessageAsync((CloudQueueMessageWrapper) message, visibilityTimeout, updateFields, requestOptions.QueueRequestOptions, requestOptions.Context, cancellationToken);
     }
 }

@@ -8,7 +8,7 @@ using TheQ.Libraries.AzureTools.AutoQueue.Options;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
-    public partial class AutoQueue : IAutoQueue
+    public partial class AutoQueue
     {
         /// <exception cref="NotImplementedException">In progress.</exception>
         public Task ListenAsync(ListenOptions options)

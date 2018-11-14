@@ -28,8 +28,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
         StorageUri StorageUri { get; }
 
         Uri Uri { get; }
-
-
+        
         Task AddMessageAsync(ICloudQueueMessage message, CancellationToken cancellationToken);
 
         Task AddMessageAsync(ICloudQueueMessage message, TimeSpan? timeToLive, TimeSpan? initialVisibilityDelay, RequestOptions requestOptions, CancellationToken cancellationToken);
@@ -72,7 +71,6 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
 
         Task SetPermissionsAsync(QueuePermissions permissions, RequestOptions requestOptions, CancellationToken cancellationToken);
 
-        Task UpdateMessageAsync(ICloudQueueMessage message, TimeSpan visibilityTimeout, MessageUpdateFields updateFields, RequestOptions requestOptions,
-            CancellationToken cancellationToken);
+        Task UpdateMessageAsync(ICloudQueueMessage message, TimeSpan visibilityTimeout, MessageUpdateFields updateFields, RequestOptions requestOptions, CancellationToken cancellationToken);
     }
 }

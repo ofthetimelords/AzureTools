@@ -24,6 +24,13 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Standard
 
         public int NumberOfRetries { get; }
         public IRetryStrategy RetryStrategy { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether a <see cref="RetriesExhaustedException"/> will be thrown when the maximum amount of retries has been attempted.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [throw on exhausted retries]; otherwise, <c>false</c>.
+        /// </value>
         public bool ThrowOnExhaustedRetries { get; }
 
         public async Task Do(Func<CancellationToken, Task> action, CancellationToken token)

@@ -43,5 +43,13 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         private ISerializer MessageSerializer { get; }
 
         private IRetryPolicy RetryPolicy { get; }
+
+
+        private Task EnsureQueueExists(ListenOptionsBase options)
+        {
+            return this.RetryPolicy.Do(token => options.SkipQueueExistsCheck
+                ? Task.CompletedTask
+                : this.OriginalQueue.CreateIfNotExistsAsync(options.RequestOptions, options.CancelToken), options.CancelToken);
+        }
     }
 }

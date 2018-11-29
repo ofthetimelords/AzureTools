@@ -77,5 +77,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Options
         public TimeSpan PollFrequency { get; }
 
         public RequestOptions RequestOptions { get; }
+
+        public bool SkipQueueExistsCheck { get; set; } = false;
     }
 }

@@ -14,7 +14,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 
         string MessageId { get; }
 
-        string OffloadMarker { get; }
+        byte[] OffloadMarker { get; }
 
         T ReadMessage<T>() where T : class;
 

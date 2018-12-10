@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Standard.RetryStrategies;
 using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
@@ -18,7 +19,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Standard
         /// <summary>
         ///     Initializes a new instance of the <see cref="SimpleAutoQueueFactory" /> class.
         /// </summary>
-        public SimpleAutoQueueFactory() : base(new SimpleRetryPolicy(10, true, new LinearRetryStrategy(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.9))))
+        public SimpleAutoQueueFactory() : base(new SimpleRetryPolicy(10, true, new LinearRetryStrategy(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.9))), new NullLoggerFactory())
         {
         }
     }

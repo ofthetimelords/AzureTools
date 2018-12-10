@@ -1,5 +1,6 @@
 ﻿#region
 
+using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
 
@@ -16,7 +17,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Standard
         /// <summary>
         ///     Initializes a new instance of the <see cref="StandardAutoQueueFactory" /> class.
         /// </summary>
-        public StandardAutoQueueFactory(IRetryPolicy retryPolicy) : base(retryPolicy, new BsonSerializer())
+        public StandardAutoQueueFactory(IRetryPolicy retryPolicy, ILoggerFactory loggerFactory) : base(retryPolicy, new BsonSerializer(), loggerFactory)
         {
         }
     }

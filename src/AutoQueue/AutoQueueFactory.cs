@@ -1,5 +1,6 @@
 ﻿#region
 
+using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Wrappers;
 
@@ -9,15 +10,18 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 {
     public class AutoQueueFactory : IAutoQueueFactory
     {
-        public AutoQueueFactory(IRetryPolicy retryPolicy, ISerializer serializer)
+        public AutoQueueFactory(IRetryPolicy retryPolicy, ISerializer serializer, ILoggerFactory loggerFactory)
         {
             this.RetryPolicy = retryPolicy;
             this.Serializer = serializer;
+            this.LoggerFactory = loggerFactory;
         }
 
         public IRetryPolicy RetryPolicy { get; }
 
-        public ISerializer Serializer { get; }
+        private ISerializer Serializer { get; }
+
+        private ILoggerFactory LoggerFactory { get; }
 
         /// <summary>
         /// Creates an IAutoQueue implementation.
@@ -26,6 +30,6 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         /// <returns>
         /// An <see cref="IAutoQueue" /> implementation.
         /// </returns>
-        public IAutoQueue Create(ICloudQueue sourceQueue) => new AutoQueue(sourceQueue, this.Serializer, this.RetryPolicy);
+        public IAutoQueue Create(ICloudQueue sourceQueue) => new AutoQueue(sourceQueue, this.Serializer, this.RetryPolicy, this.LoggerFactory.CreateLogger<AutoQueue>());
     }
 }

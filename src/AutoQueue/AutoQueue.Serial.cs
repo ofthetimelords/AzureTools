@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Queue;
 using TheQ.Libraries.AzureTools.AutoQueue.Options;
-using TheQ.Libraries.AzureTools.Common.Exceptions;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue
 {
@@ -33,9 +28,8 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 
                     await options.MessageHandler(message).ConfigureAwait(false);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
                 }
             }
         }

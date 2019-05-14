@@ -6,7 +6,7 @@ stages:
     - task: DotNetCoreInstaller@0
       inputs:
         version: "2.2.203"
-- stage: "Dependency restoration"
+- stage: "Dependencies"
   jobs:
   - job:
     steps:

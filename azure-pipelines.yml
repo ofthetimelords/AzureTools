@@ -20,7 +20,5 @@ steps:
   inputs:
     version: '2.2.4'
 - script: dotnet restore
-
-steps:
 - script: docker build -f Dockerfile -t $(imageName) .
   displayName: 'docker build'

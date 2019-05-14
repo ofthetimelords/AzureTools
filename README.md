@@ -1,4 +1,4 @@
-[Placeholder]
+[![Build Status](https://dev.azure.com/JamesKavakopoulos/AzureTools/_apis/build/status/ofthetimelords.AzureTools?branchName=master)](https://dev.azure.com/JamesKavakopoulos/AzureTools/_build/latest?definitionId=1&branchName=master)
 
 # AzureTools
 The newer version of my CloudTools library.

@@ -3,12 +3,13 @@ steps:
   inputs:
     version: "2.2.203"
 - script: dotnet restore
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
+- script: dotnet build
+# - task: DotNetCoreCLI@2
+#   displayName: Build
+#   inputs:
+#     command: build
+#     projects: '**/*.csproj'
+#     arguments: '--configuration Release'
 
 trigger:
   batch: "true"

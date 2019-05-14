@@ -1,16 +1,19 @@
 stages:
-- stage: "Build"
+- stage: "Prerequisites"
   jobs:
-  - job: "InstallNetCore"
+  - job:
     steps:
     - task: DotNetCoreInstaller@0
       inputs:
         version: "2.2.203"
-  - job: "NugetRestore"
+- stage: "Dependency restoration"
+  jobs:
+  - job:
     steps:
-    - script: ls .
     - script: dotnet restore
-  - job: "Build"
+- stage: "Build"
+  jobs:
+  - job:
     steps:
     - task: DotNetCoreCLI@2
       displayName: Build
@@ -18,13 +21,12 @@ stages:
         command: build
         projects: '**/*.csproj'
         arguments: '--configuration Release'
+- stage: "Tests"
+  jobs:
   - job: "RunTests"
 
 trigger:
   batch: "true"
   branches:
     include:
-    - master
-
-variables:
-  imageName: 'your-container-image-name:$(build.buildId)'
+    - development

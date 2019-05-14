@@ -1,27 +1,24 @@
-pool:
-  name: "Default"
-  vmImage: "ubuntu-16.04"
-  stages:
-  - stage: "Build"
-    jobs:
-    - job: "InstallNetCore"
-      steps:
-      - task: DotNetCoreInstaller@0
-        inputs:
-          version: "2.2.203"
-    - job: "NugetRestore"
-      steps:
-      - script: ls .
-      - script: dotnet restore
-    - job: "Build"
-      steps:
-      - task: DotNetCoreCLI@2
-        displayName: Build
-        inputs:
-          command: build
-          projects: '**/*.csproj'
-          arguments: '--configuration Release'
-    - job: "RunTests"
+stages:
+- stage: "Build"
+  jobs:
+  - job: "InstallNetCore"
+    steps:
+    - task: DotNetCoreInstaller@0
+      inputs:
+        version: "2.2.203"
+  - job: "NugetRestore"
+    steps:
+    - script: ls .
+    - script: dotnet restore
+  - job: "Build"
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration Release'
+  - job: "RunTests"
 
 trigger:
   batch: "true"

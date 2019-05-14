@@ -1,0 +1,30 @@
+stages:
+- stage: "Build"
+  jobs:
+  - job: "InstallNetCore"
+    steps:
+    - task: DotNetCoreInstaller@0
+      inputs:
+        version: "2.2.203"
+  - job: "NugetRestore"
+    steps:
+    - script: ls .
+    - script: dotnet restore
+  - job: "Build"
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration Release'
+  - job: "RunTests"
+
+trigger:
+  batch: "true"
+  branches:
+    include:
+    - master
+
+variables:
+  imageName: 'your-container-image-name:$(build.buildId)'

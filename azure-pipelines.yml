@@ -12,21 +12,23 @@ trigger:
 variables:
   imageName: 'your-container-image-name:$(build.buildId)'
 
-jobs:
-- job: "InstallNetCore"
-  steps:
-  - task: DotNetCoreInstaller@0
-    inputs:
-      version: '2.2.4'
-- job: "NugetRestore"
-  steps:
-  - script: dotnet restore
-- job: "Build"
-  steps:
-  - task: DotNetCoreCLI@2
-    displayName: Build
-    inputs:
-      command: build
-      projects: '**/*.csproj'
-      arguments: '--configuration Release'
-- job: "RunTests"
+stages:
+- stage: "Default"
+  jobs:
+  - job: "InstallNetCore"
+    steps:
+    - task: DotNetCoreInstaller@0
+      inputs:
+        version: '2.2.4'
+  - job: "NugetRestore"
+    steps:
+    - script: dotnet restore
+  - job: "Build"
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration Release'
+  - job: "RunTests"

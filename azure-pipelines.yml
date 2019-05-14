@@ -1,29 +1,14 @@
-stages:
-- stage: "Prerequisites"
-  jobs:
-  - job:
-    steps:
-    - task: DotNetCoreInstaller@0
-      inputs:
-        version: "2.2.203"
-- stage: "Dependencies"
-  jobs:
-  - job:
-    steps:
-    - script: dotnet restore
-- stage: "Build"
-  jobs:
-  - job:
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: Build
-      inputs:
-        command: build
-        projects: '**/*.csproj'
-        arguments: '--configuration Release'
-- stage: "Tests"
-  jobs:
-  - job: "RunTests"
+steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: "2.2.203"
+- script: dotnet restore
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
 
 trigger:
   batch: "true"

@@ -19,7 +19,7 @@ stages:
     steps:
     - task: DotNetCoreInstaller@0
       inputs:
-        version: '2.2.4'
+        version: "2.2.x"
   - job: "NugetRestore"
     steps:
     - script: dotnet restore

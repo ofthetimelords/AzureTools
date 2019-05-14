@@ -4,13 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-  batch: true
+  batch: "true"
   branches:
     include:
     - master
-
-pool:
-  vmImage: 'Ubuntu 16.04'
 
 variables:
   imageName: 'your-container-image-name:$(build.buildId)'

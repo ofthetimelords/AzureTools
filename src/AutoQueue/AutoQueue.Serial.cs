@@ -30,6 +30,7 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
                 }
                 catch (Exception ex)
                 {
+                    // Failures should not cause the loop to exit.
                 }
             }
         }

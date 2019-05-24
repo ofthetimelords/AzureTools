@@ -42,8 +42,8 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Wrappers
 
         public Task AddMessageAsync(ICloudQueueMessage message, CancellationToken cancellationToken) => this.Original.AddMessageAsync((CloudQueueMessageWrapper) message, cancellationToken);
 
-        public Task AddMessageAsync(ICloudQueueMessage message, TimeSpan? timeToLive, TimeSpan? initialVisibilityDelay, RequestOptions requestOptions, CancellationToken cancellationToken) =>
-            this.Original.AddMessageAsync((CloudQueueMessageWrapper) message, timeToLive, initialVisibilityDelay, requestOptions?.QueueRequestOptions, requestOptions.Context, cancellationToken);
+        public Task AddMessageAsync(ICloudQueueMessage message, SendOptions options, CancellationToken cancellationToken) =>
+            this.Original.AddMessageAsync((CloudQueueMessageWrapper) message, options?.TimeToLive, options?.InitialVisibilityDelay, options?.QueueRequestOptions, options.Context, cancellationToken);
 
         public Task ClearAsync(RequestOptions requestOptions, CancellationToken cancellationToken) => this.Original.ClearAsync(requestOptions.QueueRequestOptions, requestOptions.Context, cancellationToken);
 

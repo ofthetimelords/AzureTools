@@ -9,10 +9,11 @@ using Newtonsoft.Json.Bson;
 
 namespace TheQ.Libraries.AzureTools.AutoQueue.Standard
 {
-    public class BsonSerializer : ISerializer
+    public class BsonStreamConverter : IStreamConverter
     {
-        public async Task<byte[]> SerializeAsync(object source, CancellationToken token)
+        public async Task<Stream> ToStreamAsync(object source, CancellationToken token)
         {
+            // TODO: MemoryStream here is an assumption. Investigate how it could be removed
             using (var ms = new MemoryStream())
             using (var mw = new BsonDataWriter(ms))
             {
@@ -20,14 +21,14 @@ namespace TheQ.Libraries.AzureTools.AutoQueue.Standard
                 serializer.Serialize(mw, source);
 
                 await mw.FlushAsync(token);
-                return ms.ToArray();
+                ms.Seek(0, SeekOrigin.Begin);
+                return ms;
             }
         }
 
-        public Task<T> DeserializeAsync<T>(byte[] source, CancellationToken token)
+        public Task<T> FromStreamAsync<T>(Stream source, CancellationToken token)
         {
-            using (var ms = new MemoryStream(source))
-            using (var mr = new BsonDataReader(ms))
+            using (var mr = new BsonDataReader(source))
             {
                 var deserializer = new JsonSerializer();
 

@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
@@ -27,12 +28,20 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
 
         Task ListenParallelAsync(ListenParallelOptions options);
 
-        Task SendMessageAsync(object message);
+        Task SendAsync(object message);
 
-        Task SendMessageAsync(object message, RequestOptions options);
+        Task SendAsync(object message, SendOptions options);
 
-        Task SendMessageAsync(object message, CancellationToken token);
+        Task SendAsync(object message, CancellationToken token);
 
-        Task SendMessageAsync(object message, RequestOptions options, CancellationToken token);
+        Task SendAsync(object message, SendOptions options, CancellationToken token);
+
+        Task SendAsync(Stream message);
+
+        Task SendAsync(Stream message, SendOptions options);
+
+        Task SendAsync(Stream message, CancellationToken token);
+
+        Task SendAsync(Stream message, SendOptions options, CancellationToken token);
     }
 }

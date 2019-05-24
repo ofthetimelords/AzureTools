@@ -25,10 +25,12 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         /// <param name="messageSerializer">The <see cref="ISerializer"/> that will be used for message (de)serialization.</param>
         /// <exception cref="System.ArgumentNullException">sourceQueue - Parameter {nameof(sourceQueue)}</exception>
         /// <exception cref="ArgumentNullException">Parameter sourceQueue is required.</exception>
-        public AutoQueue(ICloudQueue sourceQueue, ISerializer messageSerializer, IRetryPolicy retryPolicy, ILogger<AutoQueue> logger)
+        public AutoQueue(ICloudQueue sourceQueue, IStreamConverter converter, IAutoQueueMessageFactory messageFactory, IMessageContentProcessor messageContentProcessor, IRetryPolicy retryPolicy, ILogger<AutoQueue> logger)
         {
             this.OriginalQueue = sourceQueue ?? throw new ArgumentNullException(nameof(sourceQueue), $"Parameter {nameof(sourceQueue)} is required");
-            this.MessageSerializer = messageSerializer;
+            this.StreamConverter = converter;
+            this.MessageFactory = messageFactory;
+            this.MessageContentProcessor = messageContentProcessor;
             this.RetryPolicy = retryPolicy;
             this.Logger = logger;
         }
@@ -39,12 +41,14 @@ namespace TheQ.Libraries.AzureTools.AutoQueue
         /// </summary>
         public ICloudQueue OriginalQueue { get; }
 
-        /// <summary>
-        /// Gets the <see cref="ISerializer"/> that will be used for message (de)serialization.
-        /// </summary>
-        private ISerializer MessageSerializer { get; }
+        private IStreamConverter StreamConverter { get; }
+
+        private IAutoQueueMessageFactory MessageFactory { get; }
+
+        private IMessageContentProcessor MessageContentProcessor { get; }
 
         private IRetryPolicy RetryPolicy { get; }
+
         private ILogger<AutoQueue> Logger { get; }
 
 
